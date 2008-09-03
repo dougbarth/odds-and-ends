@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+# A simple script that can be used to turn Rails parameter logging into
+# a functional test call.
+#
+# For example, in VIM, place the paramters in the spot where you want
+# the call to be.
+#
+#   def test_index_with_type
+#     {"action"=>"index", "type"=>"VOTE", "controller"=>"app/campaigns"}
+#   end
+#
+# Then simply highlight the line (hint, Shift-V) and then filter it through
+# this program while supplying the method (:!functional_params get). Your
+# parameters will be replaced with something that is much nicer looking.
+#
+#   def test_index_with_type
+#     get :index, :type => "VOTE"
+#   end
+#
+
+require 'rubygems'
+gem 'facets'
+require 'facets/hash/symbolize_keys'
+
+class Hash
+  def recursive_symbolize_keys!
+    self.symbolize_keys!
+    self.each_pair do |key, value|
+      if value.respond_to?(:recursive_symbolize_keys!)
+        self[key].recursive_symbolize_keys!
+      end
+    end
+  end
+
+  def to_test_s
+    '{' + self.map do |key, value|
+      "#{key.inspect} => #{value.respond_to?(:to_test_s) ?  value.to_test_s : value.inspect}"
+    end.join(", ") + '}'
+  end
+
+  def args_string
+    to_test_s[1..-2]
+  end
+end
+
+method = ARGV[0]
+to_be_filtered = STDIN.readlines
+indent = /^[ ]*/.match(to_be_filtered[0])[0]
+params = eval(to_be_filtered.join("\n"))
+params.recursive_symbolize_keys!
+
+params.delete(:controller)
+# Posted due to image submit buttons
+params.delete(:x)
+params.delete(:y)
+
+print "#{indent}#{method} :#{params.delete(:action)}, "
+puts params.args_string
