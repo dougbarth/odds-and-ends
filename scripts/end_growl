@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# A stupid script that posts a growl notification when the command is done.
+# Use this like you would watch.
+#
+#  end_growl sleep 2
+
+success = system(*ARGV)
+system('growlnotify', '-t', "<#{ARGV.join(' ')}> finished", 
+  '-m', success ? 'It completed successfully' : "It failed with status code #{$?}")
