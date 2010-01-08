@@ -1,0 +1,14 @@
+#!/bin/bash
+
+push_args=$@
+
+git push --dry-run $push_args
+
+if [[ $? == 0 ]]; then
+  push_dry_run=`git push --dry-run --porcelain $push_args 2> /dev/null`
+
+  log_range=`echo "$push_dry_run" | cut -f 3 | grep '[a-z0-9]*\.\.[a-z0-9]*'`
+  if [[ -n $log_range ]]; then
+    git log --pretty=oneline $log_range
+  fi
+fi
