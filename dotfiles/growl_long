@@ -1,0 +1,38 @@
+#
+# Modified from original code provided on MacOSXHints.com.
+#   http://www.macosxhints.com/article.php?story=20071009124425468
+# 
+
+
+export PREEXEC_EXCLUDE_LIST="mc less bash"
+
+. `dirname ${BASH_ARGV[0]}`/preexec.bash
+
+# called before each command and starts stopwatch
+function preexec () {
+  export PREEXEC_CMD=`echo $1 | awk '{ print $1; }'`
+    export PREEXEC_TIME=$(date +'%s')
+}
+
+# called after each command, stops stopwatch
+# and notifies if time elpsed exceeds threshold
+function precmd () {
+  stop=$(date +'%s')
+    start=${PREEXEC_TIME:-$stop}
+  let elapsed=$stop-$start
+    max=${PREEXEC_MAX:-10}
+
+  for i in ${PREEXEC_EXCLUDE_LIST:-}; do
+    if [ "x$i" = "x$PREEXEC_CMD" ]; then
+      max=999999;
+  break;
+  fi
+    done
+
+    if [ $elapsed -gt $max ]; then
+      growlnotify -n "iTerm" -m "took $elapsed secs" ${PREEXEC_CMD:-Shell Command}
+  fi
+}
+
+preexec_install
+

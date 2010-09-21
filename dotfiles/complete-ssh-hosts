@@ -1,0 +1,4 @@
+# Enables tab completion of SSH hostnames declared in the .ssh/config
+# file. To use, source this in your bash init file (.bashrc, .profile, etc.)
+complete -o default -o nospace -W "$(/usr/bin/env ruby -ne 'puts $_.split(/[,\s]+/)[1..-1].reject{|host| host.match(/\*|\?/)} if $_.match(/^\s*Host\s+/);' < $HOME/.ssh/config)" scp sftp ssh
+
