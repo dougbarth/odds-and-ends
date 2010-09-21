@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/doug/Code/git/textme/app/views/app/manage/account_users'
+let g:netrw_dirhist_2='/Users/doug/Code/git/textme/app/views/app/my_account'
+let g:netrw_dirhist_3='/Users/doug/Code/git/textme/app/views/app/subscription_campaigns'
+let g:netrw_dirhist_4='/Users/doug/Code/git/textme/app/views/app/short_urls'
+let g:netrw_dirhist_5='/Users/doug/Code/git/textme/app/views/admin/simulator'
+let g:netrw_dirhist_6='/Users/doug/Code/git/textme/app/views/nn_upload_mailer'
+let g:netrw_dirhist_7='/Users/doug/Code/git/textme/app/views/app/stats/messaging'
+let g:netrw_dirhist_8='/Users/doug/Code/git/textme/test/fixtures'
