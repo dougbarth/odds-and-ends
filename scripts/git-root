@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Returns the root of the git working copy.
+while [[ $PWD != "/" ]]; do
+  if [[ -d ".git" ]]; then
+    echo $PWD
+    exit 0
+  fi
+  cd ..
+done
+
+echo "No .git directory found!" >&2
+exit 1
