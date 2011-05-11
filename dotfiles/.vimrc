@@ -14,7 +14,6 @@ set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
 set showmode            " Show current mode.
 set ruler               " Show the line and column numbers of the cursor.
-set colorcolumn=120
 
 set laststatus=2        " Always show status line.
 set wildmode=longest,longest,list    " Perform bash style command completion
@@ -55,7 +54,11 @@ nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
 
 colorscheme vividchalk
-" Less intense color column
-hi ColorColumn guibg=#2d2d2d
+
+if exists('+colorcolumn')
+  set colorcolumn=120
+  " Less intense color column
+  hi ColorColumn guibg=#2d2d2d
+endif
 
 let g:ruby_debugger_progname = 'mvim'
