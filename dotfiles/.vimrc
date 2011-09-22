@@ -25,12 +25,13 @@ helptags ~/.vim/doc
 autocmd BufReadPost Capfile set syntax=ruby
 autocmd BufReadPost Gemfile set syntax=ruby
 
-autocmd BufRead *\.txt setlocal formatoptions=l
-autocmd BufRead *\.txt setlocal lbr
-autocmd BufRead *\.txt map  j gj
-autocmd BufRead *\.txt map  k gk
-autocmd BufRead *\.txt setlocal smartindent
-autocmd BufRead *\.txt setlocal spell spelllang=en_us
+autocmd BufRead *\.{txt,textile} setlocal formatoptions=l
+autocmd BufRead *\.{txt,textile} setlocal lbr
+autocmd BufRead *\.{txt,textile} map  j gj
+autocmd BufRead *\.{txt,textile} map  k gk
+autocmd BufRead *\.{txt,textile} setlocal smartindent
+autocmd BufRead *\.{txt,textile} setlocal spell spelllang=en_us
+autocmd BufRead *\.{txt,textile} setlocal nonumber
 
 au BufRead,BufNewFile *.less setfiletype less
 
@@ -53,12 +54,19 @@ endfunction
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
 
-colorscheme vividchalk
+if has('gui')
+  colorscheme solarized
+  set background=dark
+else
+  colorscheme vividchalk
+end
 
 if exists('+colorcolumn')
   set colorcolumn=120
   " Less intense color column
   hi ColorColumn guibg=#2d2d2d
+
+  autocmd BufRead *\.{txt,textile} setlocal colorcolumn=0
 endif
 
 let g:ruby_debugger_progname = 'mvim'
