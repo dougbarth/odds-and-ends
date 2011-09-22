@@ -4,3 +4,9 @@
 [submodule "dotfiles/vim/bundle/vim-colors-solarized"]
 	path = dotfiles/vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "dotfiles/vim/bundle/vim-rails"]
+	path = dotfiles/vim/bundle/vim-rails
+	url = https://github.com/tpope/vim-rails.git
+[submodule "dotfiles/vim/bundle/vim-bundler"]
+	path = dotfiles/vim/bundle/vim-bundler
+	url = https://github.com/tpope/vim-bundler.git
