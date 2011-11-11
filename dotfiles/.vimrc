@@ -17,10 +17,12 @@ set ruler               " Show the line and column numbers of the cursor.
 
 set laststatus=2        " Always show status line.
 set wildmode=longest,longest,list    " Perform bash style command completion
+set bufhidden=delete
 
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 
 helptags ~/.vim/doc
+Helptags
 
 autocmd BufReadPost Capfile set syntax=ruby
 autocmd BufReadPost Gemfile set syntax=ruby
