@@ -40,7 +40,6 @@ au BufRead,BufNewFile *.less setfiletype less
 autocmd User Rails Rnavcommand jobs app/jobs
 autocmd User Rails Rnavcommand daemons app/daemons
 autocmd User Rails Rnavcommand csupport app/controller_support
-autocmd User Rails Rnavcommand -suffix=.less less app/stylesheets
 
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
