@@ -10,6 +10,7 @@ syntax on
 filetype plugin indent on
 
 set modeline            " Enable modeline.
+set modelines=5         " Look for modeline comments in the first 5 lines of the file.
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
 set showmode            " Show current mode.
@@ -18,6 +19,12 @@ set ruler               " Show the line and column numbers of the cursor.
 set laststatus=2        " Always show status line.
 set wildmode=longest,longest,list    " Perform bash style command completion
 set bufhidden=delete
+
+" Show tabs and EOL
+set list
+set listchars=tab:▸\ ,eol:¬
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
 
 call pathogen#infect()
 
@@ -32,14 +39,12 @@ autocmd BufRead *\.{txt,textile} setlocal lbr
 autocmd BufRead *\.{txt,textile} map  j gj
 autocmd BufRead *\.{txt,textile} map  k gk
 autocmd BufRead *\.{txt,textile} setlocal smartindent
-autocmd BufRead *\.{txt,textile} setlocal spell spelllang=en_us
+"autocmd BufRead *\.{txt,textile} setlocal spell spelllang=en_us
 autocmd BufRead *\.{txt,textile} setlocal nonumber
 
 au BufRead,BufNewFile *.less setfiletype less
 
-autocmd User Rails Rnavcommand jobs app/jobs
-autocmd User Rails Rnavcommand daemons app/daemons
-autocmd User Rails Rnavcommand csupport app/controller_support
+au FileType crontab set nobackup nowritebackup
 
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
