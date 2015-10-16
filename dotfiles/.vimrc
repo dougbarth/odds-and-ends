@@ -43,6 +43,7 @@ autocmd BufRead *\.{txt,textile} setlocal smartindent
 autocmd BufRead *\.{txt,textile} setlocal nonumber
 
 au BufRead,BufNewFile *.less setfiletype less
+autocmd BufRead,BufNewFile *.hamlc set filetype=haml
 
 au FileType crontab set nobackup nowritebackup
 
@@ -70,9 +71,14 @@ end
 if exists('+colorcolumn')
   set colorcolumn=120
   " Less intense color column
-  hi ColorColumn guibg=#2d2d2d
+  hi ColorColumn guibg=#2d2d2d ctermbg=233
 
   autocmd BufRead *\.{txt,textile} setlocal colorcolumn=0
 endif
 
 let g:ruby_debugger_progname = 'mvim'
+
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=black
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=233

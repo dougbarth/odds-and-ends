@@ -13,3 +13,6 @@
 [submodule "dotfiles/vim/bundle/vim-rvm"]
 	path = dotfiles/vim/bundle/vim-rvm
 	url = https://github.com/tpope/vim-rvm.git
+[submodule "dotfiles/vim/bundle/vim-scala"]
+	path = dotfiles/vim/bundle/vim-scala
+	url = git://github.com/derekwyatt/vim-scala.git
